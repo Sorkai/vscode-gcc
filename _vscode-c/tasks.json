@@ -11,7 +11,9 @@
                 "*.c",
                 "-o",
                 //"${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${fileDirname}\\out.exe"
+                "${fileDirname}\\out.exe",
+                //"-finput-charset=UTF-8",
+                //"-fexec-charset=gbk"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -24,6 +26,33 @@
                 "isDefault": true
             },
             "detail": "调试器生成的任务。"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe 生成发布文件",
+            "command": "C:\\APP\\mingw64\\bin\\gcc.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                //"${file}",
+                "*.c",
+                "-o",
+                //"${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "${fileDirname}\\out_re.exe",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=gbk"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            //"detail": "调试器生成的任务。"
         }
     ],
     "version": "2.0.0"
