@@ -5,30 +5,62 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) 启动",
+            "name": "(gdb) 调试当前程序",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\out.exe",
+            "program": "${fileDirname}/out/${fileBasenameNoExtension}.exe", // 必须与tasks.json输出路径一致
             "args": [],
-            "stopAtEntry": false,
+            "stopAtEntry": false,           // 调试时暂停在入口(关闭)
             "cwd": "${fileDirname}",
             "environment": [],
-            "externalConsole": false,
+            "externalConsole": true,       // 启用独立控制台（支持输入）
             "MIMode": "gdb",
-            "miDebuggerPath": "C:\\APP\\mingw64\\bin\\gdb.exe",
+            "miDebuggerPath": "C:/VS/mingw64/bin/gdb.exe",
+            "preLaunchTask": "C/C++: gcc.exe 调试编译", // 自动触发编译任务
             "setupCommands": [
                 {
-                    "description": "为 gdb 启用整齐打印",
+                    "description": "启用整齐打印",
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 },
                 {
-                    "description": "将反汇编风格设置为 Intel",
+                    "description": "设置反汇编风格",
                     "text": "-gdb-set disassembly-flavor intel",
                     "ignoreFailures": true
+                },
+                {                          // 调试时显示线程信息
+                    "text": "-gdb-set print thread-events on"
+                }
+            ]
+        },
+        {                                  // 发布版调试配置
+            "name": "(gdb) 调试发布版本",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/out_release.exe",
+            "preLaunchTask": "C/C++: gcc.exe 发布编译",
+            "args": [],
+            "stopAtEntry": false,           // 调试时暂停在入口(关闭)
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,       // 启用独立控制台（支持输入）
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/VS/mingw64/bin/gdb.exe",
+            "setupCommands": [
+                {
+                    "description": "启用整齐打印",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "设置反汇编风格",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                },
+                {                          // 调试时显示线程信息
+                    "text": "-gdb-set print thread-events on"
                 }
             ]
         }
-
     ]
 }
